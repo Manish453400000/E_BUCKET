@@ -1,9 +1,11 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
+import session from 'express-session'
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 const app = express();
 
+app.use(session({secret: "cats"}))
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -16,9 +18,9 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 //routes
-// app.use("/api/v1", userRouter);
 app.get("/", (req, res) => {
-  res.status(200).send("WELLCOME TO E_BUCKET")
+  res.status(200).send("Hello")
 })
+
 
 export {app}
